@@ -3,26 +3,22 @@
 using namespace std;
 
 bool isSu(int n){
-	if(n==1) return false;
-	bool isok=true;
+	if(n<=1) return false;
 	for(int i=2;i<n;i++){
-		if(n%i==0) isok=false;
+		if(n%i==0) return false;
 	}
-	return isok;
+	return true;
 }
 
 int main(){
-	int stack[100],top=-1;
-	for(int i=1;i<=100;i++){
-		if(isSu(i)) stack[++top]=i;
-	}
+	bool visited[101];
 	int count=0;
-	for(int i=0;i<top;i++){
-		if(stack[i]+2==stack[i+1]){
-			cout<<stack[i]<<"-"<<stack[i+1]<<endl;
+	for(int i=1;i<=98;i++){
+		if(isSu(i)&&isSu(i+2)){
+			cout<<i<<"-"<<i+2<<endl;
 			count++;
 		}
 	}
-	cout<<count<<endl;
+	cout<<"孪生素数对个数："<<count<<endl;
 	return 0;
-} 
+}
