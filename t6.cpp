@@ -2,31 +2,24 @@
 
 using namespace std;
 
+#define Max 100
+
 int main(){
+	int result[Max];
+	int rear=0;
+	int model[Max];
+	for(int i=0;i<Max;i++) model[i]=-1;
 	int M,N;
 	cin>>M>>N;
+	while(M!=0&&model[M]==-1){
+		result[rear++]=(M*10)/N;
+		model[M]=rear;
+		M=(M*10)%N;
+	} 
 	cout<<M<<"/"<<N<<"=0.";
-	int result[100],site[100];
-	for(int i=0;i<100;i++) site[i]=-1;
-	int flag;
-	for(flag=0;flag<100;flag++){
-		site[M]=flag;
-		M*=10;
-		result[flag]=M/N;
-		M=M%N;
-		if(M==0) break;	//有限小数 
-		if(site[M]!=-1) break;	//开始循环 
-	}
-	if(M==0){
-		for(int i=0;i<=flag;i++){
-			cout<<result[i];
-		}
-		cout<<endl;
-	} else{
-		for(int i=0;i<=flag;i++){
-			cout<<result[i];
-		}
-		cout<<" 无限循环小数，从第"<<site[M]+1<<"位开始循环"<<endl;
+	for(int i=0;i<rear;i++) cout<<result[i];
+	if(M!=0){
+		cout<<"，无限循环小数，从第"<<model[M]<<"位开始循环"; 
 	}
 	return 0;
-} 
+}
